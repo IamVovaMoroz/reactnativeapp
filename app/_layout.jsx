@@ -47,7 +47,7 @@ const RooyLayout = () => {
       <Stack>
         <Stack.Screen
           name='index'
-          options={{ headerShown: true, title: 'Main page' }}
+          options={{ headerShown: false, title: 'Main page' }}
         />
       </Stack>
     </>
