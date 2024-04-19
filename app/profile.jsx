@@ -6,9 +6,7 @@ const Profile = () => {
   return (
     <View>
       <Text>profile</Text>
-      <Link className='text-2xl' href='/' style={{ color: 'blue' }}>
-        Go to Home page
-      </Link>
+  
     </View>
   )
 }

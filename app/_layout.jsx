@@ -33,9 +33,9 @@ const RooyLayout = () => {
   }, [fontsLoaded, error]) // Run effect when fontsLoaded or error state changes
 
 
-  // if (!fontsLoaded) {
-  //   return null
-  // }
+  if (!fontsLoaded) {
+    return null
+  }
 
   if (!fontsLoaded && !error) { // If fonts are not loaded and there are no errors
 
