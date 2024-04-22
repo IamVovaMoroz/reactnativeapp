@@ -6,8 +6,6 @@ import { SplashScreen, Stack } from 'expo-router'
 
 SplashScreen.preventAutoHideAsync() // Preventing auto-hiding of SplashScreen
 
-
-
 const RooyLayout = () => {
   const [fontsLoaded, error] = useFonts({
     'Poppins-Black': require('../assets/fonts/Poppins-Black.ttf'),
@@ -24,20 +22,19 @@ const RooyLayout = () => {
   useEffect(() => {
     if (error) throw error // Throw error if there is any font loading error
 
-
-    if (fontsLoaded) {    // If all fonts are loaded successfully
+    if (fontsLoaded) {
+      // If all fonts are loaded successfully
 
       SplashScreen.hideAsync() // Hide SplashScreen
-
     }
   }, [fontsLoaded, error]) // Run effect when fontsLoaded or error state changes
-
 
   if (!fontsLoaded) {
     return null
   }
 
-  if (!fontsLoaded && !error) { // If fonts are not loaded and there are no errors
+  if (!fontsLoaded && !error) {
+    // If fonts are not loaded and there are no errors
 
     return null
   }
@@ -45,10 +42,10 @@ const RooyLayout = () => {
   return (
     <>
       <Stack>
-        <Stack.Screen
-          name='index'
-          options={{ headerShown: false, title: 'Main page' }}
-        />
+        <Stack.Screen name='index' options={{ headerShown: false }} />
+        <Stack.Screen name='(auth)' options={{ headerShown: false }} />
+        <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
+        {/* <Stack.Screen name='/search/[query]' options={{ headerShown: false }} /> */}
       </Stack>
     </>
   )
