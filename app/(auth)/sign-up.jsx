@@ -1,15 +1,17 @@
-import { View, Text, ScrollView, Image } from 'react-native'
+import { View, Text, ScrollView, Dimensions, Alert, Image } from "react-native";
 import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { images } from '../../constants'
 import FormField from '../../components/FormField'
-import CustomButton from '../../components/FormField'
-import { Link } from 'expo-router'
+import CustomButton from '../../components/CustomButton'
+
+import { Link, router } from 'expo-router'
+import { createUser } from '../../lib/appwrite'
 
 const SignUp = () => {
   // const { setUser, setIsLogged } = useGlobalContext()
   const [form, setForm] = useState({
-	username: '',
+    username: '',
     email: '',
     password: ''
   })
@@ -17,20 +19,18 @@ const SignUp = () => {
   const [isSubmitting, setSubmitting] = useState(false)
 
   const submit = async () => {
-    if (form.email === '' || form.password === '') {
+    if (form.username === '' || form.email === '' || form.password === '') {
       Alert.alert('Error', 'Please fill in all fields')
     }
 
     setSubmitting(true)
 
     try {
-      await signIn(form.email, form.password)
-      const result = await getCurrentUser()
-      setUser(result)
-      setIsLogged(true)
+      const result = await createUser(form.email, form.password, form.username)
+    //   setUser(result)
+    //   setIsLogged(true)
 
-      Alert.alert('Success', 'User signed in successfully')
-      router.replace('/home')
+	router.replace("/home");
     } catch (error) {
       Alert.alert('Error', error.message)
     } finally {
@@ -55,7 +55,14 @@ const SignUp = () => {
             value={form.username}
             handleChangeText={e => setForm({ ...form, username: e })}
             otherStyles='mt-10'
-    
+          />
+
+          <FormField
+            title='Email'
+            value={form.email}
+            handleChangeText={e => setForm({ ...form, email: e })}
+            otherStyles='mt-7'
+            keyboardType='email-address'
           />
 
           <FormField
@@ -64,28 +71,28 @@ const SignUp = () => {
             handleChangeText={e => setForm({ ...form, password: e })}
             otherStyles='mt-7'
           />
-         <CustomButton
-            title="Sign In"
+          <CustomButton
+            title='Sign Up'
             handlePress={submit}
-            containerStyles="mt-7"
+            containerStyles='mt-7'
             isLoading={isSubmitting}
           />
 
-          <View className="flex justify-center pt-5 flex-row gap-2">
-            <Text className="text-lg text-gray-100 font-pregular">
+          <View className='flex justify-center pt-5 flex-row gap-2'>
+            <Text className='text-lg text-gray-100 font-pregular'>
               Have an account already?
             </Text>
             <Link
-              href="/sign-in"
-              className="text-lg font-psemibold text-secondary"
+              href='/sign-in'
+              className='text-lg font-psemibold text-secondary'
             >
-              Sign in
+              Login
             </Link>
           </View>
         </View>
       </ScrollView>
     </SafeAreaView>
-  );
-};
+  )
+}
 
-export default SignUp;
+export default SignUp
