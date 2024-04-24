@@ -34,7 +34,7 @@ const GlobalProvider = ({ children }) => {
         console.log(error)
       })
       .finally(() => {
-        // Set loading state to false once fetch operation is completed
+        // Set loading state to false once fetch operation is completed.
         setLoading(false)
       })
   }, []) // Empty dependency array ensures this effect runs only once when the component mounts
