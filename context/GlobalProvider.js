@@ -24,20 +24,20 @@ const GlobalProvider = ({ children }) => {
           setIsLogged(true)
           setUser(res)
         } else {
-          // If no user data is returned, set isLogged to false and user to null
+          // If no user data is returned, set isLogged to false and user to null.
           setIsLogged(false)
           setUser(null)
         }
       })
       .catch(error => {
-        // Handle any errors that occur during the fetch operation
+        // Handle any errors that occur during the fetch operation.
         console.log(error)
       })
       .finally(() => {
         // Set loading state to false once fetch operation is completed.
         setLoading(false)
       })
-  }, []) // Empty dependency array ensures this effect runs only once when the component mounts
+  }, []) // Empty dependency array ensures this effect runs only once when the component mounts.
 
   // Providing the global state to the entire application via context provider
   return (
