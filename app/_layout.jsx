@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import { Slot } from 'expo-router'
 import { useFonts } from 'expo-font'
 import { SplashScreen, Stack } from 'expo-router'
+import GlobalProvider from '../context/GlobalProvider'
 
 SplashScreen.preventAutoHideAsync() // Preventing auto-hiding of SplashScreen
 
@@ -40,14 +41,17 @@ const RooyLayout = () => {
   }
 
   return (
-    <>
+ 
+    <GlobalProvider>
       <Stack>
         <Stack.Screen name='index' options={{ headerShown: false }} />
         <Stack.Screen name='(auth)' options={{ headerShown: false }} />
         <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
         {/* <Stack.Screen name='/search/[query]' options={{ headerShown: false }} /> */}
       </Stack>
-    </>
+
+      </GlobalProvider>
+   
   )
 }
 
