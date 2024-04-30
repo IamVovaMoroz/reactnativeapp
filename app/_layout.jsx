@@ -1,58 +1,53 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React, { useEffect } from 'react'
-import { Slot } from 'expo-router'
-import { useFonts } from 'expo-font'
-import { SplashScreen, Stack } from 'expo-router'
-import GlobalProvider from '../context/GlobalProvider'
 
-SplashScreen.preventAutoHideAsync() // Preventing auto-hiding of SplashScreen
+import { useEffect } from "react";
+import { useFonts } from "expo-font";
+import "react-native-url-polyfill/auto";
+import { SplashScreen, Stack } from "expo-router";
 
-const RooyLayout = () => {
+import GlobalProvider from "../context/GlobalProvider";
+
+// Prevent the splash screen from auto-hiding before asset loading is complete.
+SplashScreen.preventAutoHideAsync();
+
+const RootLayout = () => {
   const [fontsLoaded, error] = useFonts({
-    'Poppins-Black': require('../assets/fonts/Poppins-Black.ttf'),
-    'Poppins-Bold': require('../assets/fonts/Poppins-Bold.ttf'),
-    'Poppins-ExtraBold': require('../assets/fonts/Poppins-ExtraBold.ttf'),
-    'Poppins-ExtraLight': require('../assets/fonts/Poppins-ExtraLight.ttf'),
-    'Poppins-Light': require('../assets/fonts/Poppins-Light.ttf'),
-    'Poppins-Medium': require('../assets/fonts/Poppins-Medium.ttf'),
-    'Poppins-Regular': require('../assets/fonts/Poppins-Regular.ttf'),
-    'Poppins-SemiBold': require('../assets/fonts/Poppins-SemiBold.ttf'),
-    'Poppins-Thin': require('../assets/fonts/Poppins-Thin.ttf')
-  })
+    "Poppins-Black": require("../assets/fonts/Poppins-Black.ttf"),
+    "Poppins-Bold": require("../assets/fonts/Poppins-Bold.ttf"),
+    "Poppins-ExtraBold": require("../assets/fonts/Poppins-ExtraBold.ttf"),
+    "Poppins-ExtraLight": require("../assets/fonts/Poppins-ExtraLight.ttf"),
+    "Poppins-Light": require("../assets/fonts/Poppins-Light.ttf"),
+    "Poppins-Medium": require("../assets/fonts/Poppins-Medium.ttf"),
+    "Poppins-Regular": require("../assets/fonts/Poppins-Regular.ttf"),
+    "Poppins-SemiBold": require("../assets/fonts/Poppins-SemiBold.ttf"),
+    "Poppins-Thin": require("../assets/fonts/Poppins-Thin.ttf"),
+  });
 
   useEffect(() => {
-    if (error) throw error // Throw error if there is any font loading error
+    if (error) throw error;
 
     if (fontsLoaded) {
-      // If all fonts are loaded successfully
-
-      SplashScreen.hideAsync() // Hide SplashScreen
+      SplashScreen.hideAsync();
     }
-  }, [fontsLoaded, error]) // Run effect when fontsLoaded or error state changes
+  }, [fontsLoaded, error]);
 
   if (!fontsLoaded) {
-    return null
+    return null;
   }
 
   if (!fontsLoaded && !error) {
-    // If fonts are not loaded and there are no errors
-
-    return null
+    return null;
   }
 
   return (
- 
     <GlobalProvider>
       <Stack>
-        <Stack.Screen name='index' options={{ headerShown: false }} />
-        <Stack.Screen name='(auth)' options={{ headerShown: false }} />
-        <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
-        {/* <Stack.Screen name='/search/[query]' options={{ headerShown: false }} /> */}
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+        <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="search/[query]" options={{ headerShown: false }} />
       </Stack>
+    </GlobalProvider>
+  );
+};
 
-      </GlobalProvider>
-   
-  )
-}
-
-export default RooyLayout
+export default RootLayout;
