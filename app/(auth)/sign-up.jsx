@@ -20,25 +20,43 @@ const SignUp = () => {
 
   const [isSubmitting, setSubmitting] = useState(false)
 
+  // const submit = async () => {
+  //   if (form.username === '' || form.email === '' || form.password === '') {
+  //     Alert.alert('Error', 'Please fill in all fields')
+  //   }
+
+  //   setSubmitting(true)
+
+  //   try {
+  //     const result = await createUser(form.email, form.password, form.username)
+  //     setUser(result)
+  //     setIsLogged(true)
+
+	// router.replace("/home");
+  //   } catch (error) {
+  //     Alert.alert('Error', error.message)
+  //   } finally {
+  //     setSubmitting(false)
+  //   }
+  // }
   const submit = async () => {
-    if (form.username === '' || form.email === '' || form.password === '') {
-      Alert.alert('Error', 'Please fill in all fields')
+    if (form.username === "" || form.email === "" || form.password === "") {
+      Alert.alert("Error", "Please fill in all fields");
     }
 
-    setSubmitting(true)
-
+    setSubmitting(true);
     try {
-      const result = await createUser(form.email, form.password, form.username)
-      setUser(result)
-      setIsLogged(true)
+      const result = await createUser(form.email, form.password, form.username);
+      setUser(result);
+      setIsLogged(true);
 
-	router.replace("/home");
+      router.replace("/home");
     } catch (error) {
-      Alert.alert('Error', error.message)
+      Alert.alert("Error", error.message);
     } finally {
-      setSubmitting(false)
+      setSubmitting(false);
     }
-  }
+  };
 
   return (
     <SafeAreaView className='bg-primary h-full '>
